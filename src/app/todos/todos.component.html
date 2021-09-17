@@ -16,11 +16,10 @@
                   placeholder="Enter Todo...">
                 </div>
                 <div  class="control">
-                  <button type="submit" class="button is-info">
+                  <button type="submit" class="button {{ (myTodo == '' ? 'is-info': 'is-success') }}">
                     <span class="material-icons">
-                      
-                      add
-                      </span>
+                      {{ myTodo == "" ? "add": "mode_edit_outline" }}
+                      </span> 
                       {{ myTodo == "" ? "Add": "Edit" }}
                     </button>
                 </div>
