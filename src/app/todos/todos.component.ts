@@ -11,7 +11,9 @@ import { v4 as uuidv4 } from 'uuid';
 export class TodosComponent implements OnInit {
 todos:Todo[]=[];
 myTodo :string="";
-editTodo=[]
+todoid:string="";
+
+editbutton:boolean=false;
   constructor() { }
 
   ngOnInit(): void {
@@ -41,13 +43,24 @@ editTodo=[]
   }
 
   onAdd(){
-    if(this.myTodo !=""){
-    this.todos.push({
-      id:uuidv4(),
-      todo:this.myTodo,
-      done:false
-  
+    if(this.myTodo !="" && this.editbutton== false){
+      this.todos.push({
+        id:uuidv4(),
+        todo:this.myTodo,
+        done:false
     })
+  }
+  else if (this.editbutton){
+    this.todos.map((item,i)=>{
+      if(item.id==this.todoid){
+      //  const xx = item.todo
+      //  return xx ? this.myTodo : xx
+      }
+      
+    })
+
+      this.editbutton= false
+      this.todoid = ""
   }
     this.myTodo= ""
   }
@@ -59,7 +72,9 @@ editTodo=[]
   onEdit(id:any){
    this.todos.map((item,i)=>{
      if(item.id==id){
-       this.myTodo= item.todo
+      this.myTodo= item.todo
+      this.editbutton= true
+      this.todoid = id
      }
    })
    

@@ -16,12 +16,23 @@
                   placeholder="Enter Todo...">
                 </div>
                 <div  class="control">
-                  <button type="submit" class="button {{ (myTodo == '' ? 'is-info': 'is-success') }}">
-                    <span class="material-icons">
-                      {{ myTodo == "" ? "add": "mode_edit_outline" }}
+                  <div *ngIf="editbutton; else elseBlock">
+                    <button type="submit" class="button is-success">
+                      <span class="material-icons" >
+                        mode_edit_outline
+                        </span> 
+                        Edit
+                      </button>
+                  </div>
+                  <ng-template #elseBlock>
+                    <button type="submit" class="button is-info">
+                    <span class="material-icons" >
+                     add
                       </span> 
-                      {{ myTodo == "" ? "Add": "Edit" }}
+                     Add
                     </button>
+                  </ng-template>
+                  
                 </div>
               </div>
         </form>
@@ -45,13 +56,13 @@
           </ng-template>
         </div>
         
-          <div class="{{(todo.done? 'todo-text-completed': 'todo-text')}}" (click)="toogleDone(todo.id)">
+          <div class="{{todo.done? 'todo-text-completed': 'todo-text'}}" (click)="toogleDone(todo.id)">
             {{todo.todo}} 
           </div>
 
           <div class="todo-control-box">
             <div class="todo-control-buton">
-              <span class="material-icons" (click)="onEdit(todo.id)">
+              <span class="material-icons {{ todo.done ?  'md-dark md-inactive':'' }}" (click)="onEdit(todo.id)">
                 edit
                 </span>
             </div>
